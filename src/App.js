@@ -3,19 +3,6 @@ import "./App.css";
 import { useQuery, gql } from "@apollo/client";
 import { Toolbar } from "./Toolbar";
 
-const GET_LAUNCHES = gql`
-  query {
-    launches {
-      id
-      mission_name
-      details
-      rocket {
-        rocket_name
-      }
-    }
-  }
-`;
-
 function ShipGrid(props) {
   const GET_SHIPS = gql`
     query {
@@ -43,6 +30,19 @@ function ShipGrid(props) {
 }
 
 function LaunchGrid(props) {
+  const GET_LAUNCHES = gql`
+    query {
+      launches {
+        id
+        mission_name
+        details
+        rocket {
+          rocket_name
+        }
+      }
+    }
+  `;
+
   const { loading, error, data } = useQuery(GET_LAUNCHES);
 
   if (loading) return <p>Loading...</p>;
