@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 import { useQuery, gql } from "@apollo/client";
+import { Toolbar } from "./Toolbar";
 
 const GET_LAUNCHES = gql`
   query {
@@ -77,17 +78,11 @@ function App() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 ml-4 mr-4 mt-2">
       <h1 className="text-3xl text-white">SpaceX GraphQL</h1>
 
-      <div className="ml-4 mr-4 space-y-6">
-        <div className="space-x-1 flex">
-          <select value={shownType} className="text-xl rounded-sm pl-2" name="type" onChange={onSelectChanged}>
-            <option value={'ship'}>Ships</option>
-            <option value={'launch'}>Launches</option>
-          </select>
-          <input value={query} onChange={onQueryChanged} placeholder="Search" className="grow text-xl rounded-sm p-2" name="query"></input>
-        </div>
+      <div className="space-y-6">
+        <Toolbar shownType={shownType} query={query} onSelectChanged={onSelectChanged} onQueryChanged={onQueryChanged} />
 
         <div className="grid grid-cols-4 gap-3">
           <GridData shownType={shownType} query={query} />
